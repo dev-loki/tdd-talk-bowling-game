@@ -27,4 +27,15 @@ class GameTest extends TestCase
 
         self::assertSame(0, $game->score());
     }
+
+    final public function testAnotherMinimalOutcome(): void
+    {
+        $game = new Game();
+
+        for ($i = 0; $i < 20; $i++) {
+            $game->roll(1);
+        }
+
+        self::assertSame(20, $game->score());
+    }
 }
