@@ -20,12 +20,12 @@ final class Game implements BowlingInterface
         $length = count($this->rolls);
 
         for ($i = 0; $i < $length-1; $i += 2) {
-            $frameScore = $this->totalFramePins($i);
-            if ($this->isSpare($i)) {
-                $frameScore += $this->bonusFromSpare($i);
-            } else if ($this->isStrike($i)) {
+            $frameScore = $this->currentFramePins($i);
+            if ($this->isStrike($i)) {
                 $frameScore += $this->bonusFromStrike($i);
                 $i--; // we have one roll less!
+            } else if ($this->isSpare($i)) {
+                $frameScore += $this->bonusFromSpare($i);
             }
             $totalScore += $frameScore;
         }
@@ -33,14 +33,9 @@ final class Game implements BowlingInterface
         return $totalScore;
     }
 
-    private function bonusFromSpare(int $i): int
+    private function currentFramePins(int $i): int
     {
-        return $this->rolls[$i + 2];
-    }
-
-    private function totalFramePins(int $i): int
-    {
-        if ($this->rolls[$i] === 10) {
+        if ($this->isStrike($i)) {
             return $this->rolls[$i];
         }
 
@@ -49,13 +44,17 @@ final class Game implements BowlingInterface
 
     private function isSpare(int $i): bool
     {
-        return $this->rolls[$i] + $this->rolls[$i + 1] === 10
-               && $this->rolls[$i] < 10;
+        return $this->currentFramePins($i) === 10 && !$this->isStrike($i);
     }
 
     private function isStrike(int $i): bool
     {
         return $this->rolls[$i] === 10;
+    }
+
+    private function bonusFromSpare(int $i): int
+    {
+        return $this->rolls[$i + 2];
     }
 
     private function bonusFromStrike(int $i): int
