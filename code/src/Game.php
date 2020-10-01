@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace LokiDev\Bowling;
 
-class Game implements BowlingInterface
+final class Game implements BowlingInterface
 {
     /** @var int[] */
-    private $rolls = [];
+    private array $rolls = [];
 
     public function roll(int $pins): void
     {
@@ -20,13 +20,28 @@ class Game implements BowlingInterface
         $length = count($this->rolls);
 
         for ($i = 0; $i < $length-1; $i += 2) {
-            $tempScore = $this->rolls[$i] + $this->rolls[$i+1];
-            if ($tempScore === 10) {
-                $tempScore += $this->rolls[$i + 2];
+            $frameScore = $this->totalFramePins($i);
+            if ($this->isSpare($frameScore)) {
+                $frameScore += $this->bonusFromSpare($i);
             }
-            $totalScore += $tempScore;
+            $totalScore += $frameScore;
         }
 
         return $totalScore;
+    }
+
+    private function bonusFromSpare(int $i): int
+    {
+        return $this->rolls[$i + 2];
+    }
+
+    private function totalFramePins(int $i): int
+    {
+        return $this->rolls[$i] + $this->rolls[$i + 1];
+    }
+
+    private function isSpare(int $frameScore): bool
+    {
+        return $frameScore === 10;
     }
 }
