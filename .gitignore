@@ -1,0 +1,5 @@
+code/vendor
+node_modules
+.phpunit.result.cache
+.idea/
+exampleCode/
