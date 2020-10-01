@@ -16,4 +16,14 @@ class GameTest extends TestCase
         self::assertTrue(method_exists($game, 'score'), 'Check for methods');
         self::assertTrue(method_exists($game, 'roll'), 'Check for methods');
     }
+
+    final public function testMinimalOutcome(): void
+    {
+        $game = new Game();
+        for($i = 0; $i < 20; $i++) {
+            $game->roll(0);
+        }
+
+        self::assertSame(0, $game->score());
+    }
 }
