@@ -11,36 +11,23 @@ final class GameTest extends TestCase
 {
     private Game $game;
 
-    public function testMinimalOutcome(): void
+    /** @dataProvider provideRolls */
+    public function testRolls(array $rolls, int $expectedScore): void
     {
-        $this->rollPinsMultipleTimes(0, 20);
-
-        self::assertSame(0, $this->game->score());
-    }
-
-    public function testAnotherMinimalOutcome(): void
-    {
-        $this->rollPinsMultipleTimes(1, 20);
-
-        self::assertSame(20, $this->game->score());
-    }
-
-    final public function testOneSpare(): void
-    {
-        $this->game->roll(5);
-        $this->game->roll(5);
-        $this->game->roll(5);
-
-        $this->rollPinsMultipleTimes(0, 17);
-
-        self::assertSame(20, $this->game->score());
-    }
-
-    private function rollPinsMultipleTimes(int $pins, int $times): void
-    {
-        for ($i = 0; $i < $times; $i++) {
-            $this->game->roll($pins);
+        foreach($rolls as $roll) {
+            $this->game->roll($roll);
         }
+
+        self::assertSame($expectedScore, $this->game->score());
+    }
+
+    public function provideRolls(): array
+    {
+        return [
+            '20 x 0' => [array_fill(0, 20, 0), 0],
+            '20 x 1' => [array_fill(0, 20, 1), 20],
+            'one spare' => [[5, 5, 5] + array_fill(0, 17, 0), 20],
+        ];
     }
 
     public function setUp(): void
