@@ -25,6 +25,17 @@ final class GameTest extends TestCase
         self::assertSame(20, $this->game->score());
     }
 
+    final public function testOneSpare(): void
+    {
+        $this->game->roll(5);
+        $this->game->roll(5);
+        $this->game->roll(5);
+
+        $this->rollPinsMultipleTimes(0, 17);
+
+        self::assertSame(20, $this->game->score());
+    }
+
     private function rollPinsMultipleTimes(int $pins, int $times): void
     {
         for ($i = 0; $i < $times; $i++) {
