@@ -30,7 +30,7 @@ final class GameTest extends TestCase
 
             // Exactly 19 rolls, as 10 will ignore the rest of the frame!
             'one strike' => [array_merge([10, 2, 3], array_fill(0, 16, 0)), 20],
-            // 'perfect game' => [array_fill(0, 12, 10), 300],
+            'perfect game' => [array_fill(0, 12, 10), 300],
         ];
     }
 
