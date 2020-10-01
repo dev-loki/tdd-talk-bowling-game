@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LokiDev\Bowling\Test;
 
+use LokiDev\Bowling\Game;
 use PHPUnit\Framework\TestCase;
 
 class GameTest extends TestCase
@@ -12,7 +13,7 @@ class GameTest extends TestCase
     {
         $game = new Game();
         self::assertNotEmpty($game);
-        self::assertTrue(method_exists($game, 'score'));
-        self::assertTrue(method_exists($game, 'roll'));
+        self::assertTrue(method_exists($game, 'score'), 'Check for methods');
+        self::assertTrue(method_exists($game, 'roll'), 'Check for methods');
     }
 }
