@@ -7,35 +7,33 @@ namespace LokiDev\Bowling\Test;
 use LokiDev\Bowling\Game;
 use PHPUnit\Framework\TestCase;
 
-class GameTest extends TestCase
+final class GameTest extends TestCase
 {
-    final public function testGameExists(): void
+    private Game $game;
+
+    public function testMinimalOutcome(): void
     {
-        $game = new Game();
-        self::assertNotEmpty($game);
-        self::assertTrue(method_exists($game, 'score'), 'Check for methods');
-        self::assertTrue(method_exists($game, 'roll'), 'Check for methods');
+        $this->rollPinsMultipleTimes(0, 20);
+
+        self::assertSame(0, $this->game->score());
     }
 
-    final public function testMinimalOutcome(): void
+    public function testAnotherMinimalOutcome(): void
     {
-        $game = new Game();
+        $this->rollPinsMultipleTimes(1, 20);
 
-        for ($i = 0; $i < 20; $i++) {
-            $game->roll(0);
-        }
-
-        self::assertSame(0, $game->score());
+        self::assertSame(20, $this->game->score());
     }
 
-    final public function testAnotherMinimalOutcome(): void
+    private function rollPinsMultipleTimes(int $pins, int $times): void
     {
-        $game = new Game();
-
-        for ($i = 0; $i < 20; $i++) {
-            $game->roll(1);
+        for ($i = 0; $i < $times; $i++) {
+            $this->game->roll($pins);
         }
+    }
 
-        self::assertSame(20, $game->score());
+    public function setUp(): void
+    {
+        $this->game = new Game();
     }
 }
