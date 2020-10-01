@@ -1,418 +1,445 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
 
-		<style>
-			pre.red {
-                color:red;
-            }
-            pre.green {
-                color:lawngreen;
-            }
-            .sidenode {
-                font-size: 2.5rem;
-                position: absolute;
-                bottom: 10px;
-                left: 10px;
-                color: white;
-                background: rgba(0, 0, 0, 0.4);
-                padding: 5px 10px;
-                border-radius: 3px;
-            }
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<!-- Intro -->
-				<section>
-					<h1>Greenfield TDD</h1>
-					<h4>Testdriven Development für Anfänger</h4>
-					<hr>
-					<p style="font-size:1.1rem">
-						Torsten Zielke<br>
-						torsten.zielke@protonmail.com<br>
-						Software Developer @Check24
-					</p>
-				</section>
+    <style>
+        pre.red {
+            color: red;
+        }
 
-                <section>
-                    <h1>Ablauf</h1>
+        pre.green {
+            color: lawngreen;
+        }
+
+        .sidenode {
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>Greenfield TDD</h1>
+            <h4>Testdriven Development für Anfänger</h4>
+            <hr>
+            <p style="font-size:1.1rem">
+                Torsten Zielke<br>
+                torsten.zielke@protonmail.com<br>
+                Software Developer @Check24
+            </p>
+        </section>
+
+        <section>
+            <h1>Ablauf</h1>
+            <ul>
+                <li>❔ Ein paar Fragen</li>
+                <li>🏆 Motivation / Vorteile</li>
+                <li>🔭 Fakten/Wissenschaft</li>
+                <li>📃 3 Regeln des TDD</li>
+                <li>🏭 Praxis</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Worum es nicht geht</h2>
+            <div class="fragment">
+                <hr>
+                <h5>Allgemeines Unittesting</h5>
+                <h5>CI/CD</h5>
+            </div>
+            <aside class="notes">
+                Stattdessen TDD -> Was ist das? Und warum überhaupt?
+            </aside>
+        </section>
+
+        <!-- Interaktion/Fragen -->
+        <section>
+            <section>
+                <h1>Fragestunde</h1>
+            </section>
+
+            <section>
+                <h2>Erfahrungen mit automatisierten Tests generell? (z.B. PHPUnit)</h2>
+                <hr>
+                <p style="font-size:42px">https://www.strawpoll.me/21029462</p>
+                <aside class="notes">
+                    In Chat kopieren ;) - https://www.strawpoll.me/21029462
+                </aside>
+            </section>
+
+            <section>
+                <h2>Erfahrungen mit TDD?</h2>
+                <hr>
+                <p style="font-size:42px">https://www.strawpoll.me/21029466</p>
+            </section>
+
+            <section>
+                <h2>Macht es Spaß, Tests zu schreiben?¹</h2>
+                <p style="font-size:42px">https://www.strawpoll.me/21029503</p>
+
+                <div class="fragment">
+                    <iframe src="https://giphy.com/embed/3orif5HoRWOMYZBfDG" width="480" height="277" frameBorder="0"
+                            class="giphy-embed" allowFullScreen></iframe>
+                    <p style="font-size:small"><a
+                            href="https://giphy.com/gifs/season-16-the-simpsons-16x5-3orif5HoRWOMYZBfDG">via GIPHY</a>
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h4>Warum ist das so</h4>
+                <h4 class="fragment">?</h4>
+                <ul>
+                    <li class="fragment">Wenn wir Tests <b>nachher</b> schreiben, wissen wir ja bereits, dass es läuft!
+                    </li>
+                    <li class="fragment">Das macht keinen Spaß (╥﹏╥)</li>
+                    <li class="fragment">Wir haben durch manuelles Testen ja bereits geprüft -> Es läuft, aber ...</li>
+                    <li class="fragment">... wie häufig testen wir manuell? Ist das nicht sehr repetitiv?</li>
+                    <li class="fragment">Kann man repetitive Dinge nicht irgendwie auslagern ;) ...</li>
+                </ul>
+                <aside class="notes">In die Runde Fragen ;)</aside>
+            </section>
+
+            <section>
+                <h3>Warum <span style="text-decoration:underline">überhaupt</span> testen?</h3>
+                <p class="fragment">Und dann auch noch <strong>vor</strong> dem eigentlichen Code?</p>
+                <p class="fragment">Wie viele Löcher dürfen es denn sein?</p>
+                <div class="fragment">
+                    <iframe src="https://giphy.com/embed/81hgp3E9mwHn2" width="480" height="403" frameBorder="0"
+                            class="giphy-embed" allowFullScreen></iframe>
+                    <p style="font-size:small"><a href="https://giphy.com/gifs/fail-airplane-army-81hgp3E9mwHn2">via
+                        GIPHY</a></p>
+                </div>
+            </section>
+
+            <section>
+                <h5>!</h5>
+                <ul>
+                    <li class="fragment">Kostenlose Dokumentation</li>
+                    <li class="fragment">"Wer hat schon Zeit für Tests wenn das Features doch schon fertig ist?"</li>
+                    <li class="fragment">Wir können uns "sicher" fühlen</li>
+                    <li class="fragment">Es ist nahezu unmöglich schwer wartbaren Code zu schreiben</li>
+                    <li class="fragment">Angewandte Psychologie: Die ständige Jagd nach grün!</li>
+                    <li class="fragment">Minimierte Debuggingzeit</li>
+                </ul>
+                <aside class="notes">
                     <ul>
-                        <li>❔ Ein paar Fragen</li>
-                        <li>🏆 Motivation / Vorteile</li>
-                        <li>🔭 Fakten/Wissenschaft</li>
-                        <li>📃 3 Regeln des TDD</li>
-                        <li>🏭 Praxis</li>
+                        <li>Wie sicher fühlen wir uns, wenn:
+                            <ul>
+                                <li>wir jederzeit ein Savegame haben?</li>
+                                <li>Wir zuversichtlich refactoren können</li>
+                            </ul>
+                        </li>
+                        <li>Wartbarer Code:
+                            <br>TDD führt zu minimalem leicht testbaren Code
+                            <br>leicht testbar === entkoppelt
+                            <br>entkoppelt === leicht wartbar
+                        </li>
+                        <li>Stichwort: Decoupling/Cyclomatic Complexity</li>
                     </ul>
-                </section>
+                </aside>
+            </section>
 
-                <section>
-                    <h2>Worum es nicht geht</h2>
-                    <div class="fragment">
-                        <hr>
-                        <h5>Allgemeines Unittesting</h5>
-                        <h5>CI/CD</h5>
-                    </div>
-                    <aside class="notes">
-                        Stattdessen TDD -> Was ist das? Und warum überhaupt?
-                    </aside>
-                </section>
+            <section>
+                <h1>?</h1>
+                <h3>Was ist denn die "richtige" Testabdeckung?</h3>
+                <p> Also: Wie viel Prozent unseres Codes sollte durch Tests abgedeckt sein?</p>
+            </section>
 
-				<!-- Interaktion/Fragen -->
-				<section>
-					<section>
-						<h1>Fragestunde</h1>
-					</section>
+            <section>
+                <h3>Aber was sagen <span
+                        style="color:#009ee3;background-color:#ffed00;border-bottom:12px solid #a5027d;padding-left:5px;padding-right:5px">Profis</span>
+                    zu TDD?</h3>
+                <ul>
+                    <li class="fragment">Populäre Vertreter aus der Industrie: K. Beck, R.C. Martin (Clean *), etc.</li>
+                    <li class="fragment">TDD vs Test Last: <br>Qualität: 👍<br>Zeitaufwand: ⚖️ <a
+                            href="https://sewiki.iai.uni-bonn.de/_media/teaching/labs/xp/2012b/seminar/3-tdd.pdf">[1]</a>
+                    </li>
+                    <li class="fragment">Gegenmeinungen: <a
+                            href="http://compilehorrors.com/test-driven-development-tdd-vs-test-last-development-tld-a-comparative-study/">compilehorrors.com</a>
+                    </li>
+                    <li class="fragment">Außerdem: Fast alle Studien beziehen sich auf Java oder C-Dialekte.</li>
+                </ul>
+            </section>
+        </section>
 
-					<section>
-						<h2>Erfahrungen mit automatisierten Tests generell? (z.B. PHPUnit)</h2>
-						<hr>
-                        <p style="font-size:42px">https://www.strawpoll.me/21029462</p>
-                        <aside class="notes">
-                            In Chat kopieren ;) - https://www.strawpoll.me/21029462
-                        </aside>
-					</section>
+        <!-- Theorie -->
+        <section>
+            <section>
+                <h4>Die 3 Regeln des TDD¹</h4>
+                <ol>
+                    <li><span class="fragment">Schreibe keinen Produktivcode, es sei denn er soll einen fehlgeschlagenen Test bestehen lassen.</span>
+                    </li>
+                    <li><span class="fragment">Schreibe nicht mehr von einem Unittest, als ausreicht um diesen scheitern zu lassen. Parsingfehler sind Fehler.</span>
+                    </li>
+                    <li><span class="fragment">Schreibe nicht mehr Produktionscode, als ausreichend ist, um den Test für eine nicht bestandene Einheit zu bestehen.</span>
+                    </li>
+                </ol>
+                <p style="font-size:16px">¹ Von Uncle Bob frei ins Deutsche und auf PHP angewandt.</p>
+            </section>
 
-                    <section>
-                        <h2>Erfahrungen mit TDD?</h2>
-                        <hr>
-                        <p style="font-size:42px">https://www.strawpoll.me/21029466</p>
-                    </section>
+            <section data-background-image="assets/red-green-refactor.png" data-background-color="#eee"
+                     data-background-size="80%"></section>
 
-                    <section>
-                        <h2>Macht es Spaß, Tests zu schreiben?¹</h2>
-                        <p style="font-size:42px">https://www.strawpoll.me/21029503</p>
+            <section>
+                <h3>Echt jetzt? Ist das nicht ein <span style="text-decoration:underline">RIESEN</span> Overhead?</h3>
+            </section>
+            <section>
+                <h3>Schauen wir uns doch mal ein "recht" verbreitetes Vorgehen an</h3>
+                <ul style="list-style: none">
+                    <li class="fragment"><span style="color:green">⏺</span> Dev implementiert features ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:green">⏺</span> Codereview ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:green">⏺</span> QA ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:red">⏺</span> User ➔ Findet Bug!</li>
+                    <li class="fragment"><span style="color:green">⏺</span> Dev fixt feature ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:green">⏺</span> Codereview ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:green">⏺</span> QA ➔ kein Bug</li>
+                    <li class="fragment"><span style="color:yellow">⏺</span> User ➔ Findet keinen Bug (vlt.?!)</li>
+                </ul>
+            </section>
+        </section>
 
-                        <div class="fragment">
-                            <iframe src="https://giphy.com/embed/3orif5HoRWOMYZBfDG" width="480" height="277" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                            <p style="font-size:small"><a href="https://giphy.com/gifs/season-16-the-simpsons-16x5-3orif5HoRWOMYZBfDG">via GIPHY</a></p>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h4>Warum ist das so</h4>
-                        <h4 class="fragment">?</h4>
-                        <ul>
-                            <li class="fragment">Wenn wir Tests <b>nachher</b> schreiben, wissen wir ja bereits, dass es läuft!</li>
-                            <li class="fragment">Das macht keinen Spaß (╥﹏╥)</li>
-                            <li class="fragment">Wir haben durch manuelles Testen ja bereits geprüft -> Es läuft, aber ...</li>
-                            <li class="fragment">... wie häufig testen wir manuell? Ist das nicht sehr repetitiv?</li>
-                            <li class="fragment">Kann man repetitive Dinge nicht irgendwie auslagern ;) ... </li>
+        <!-- KATA -->
+        <section>
+            <section>
+                <h1>TDD Kata: Bowling Game</h1>
+            </section>
+            <section>
+                <h4>Regeln</h4>
+                <ul style="list-style:none">
+                    <li>10 "Frames" mit 10 Pins</li>
+                    <li class="fragment">
+                        2 Würfe pro Frame, aber 3 Würfe in Runde 10, wenn 1&2 Wurf Spare oder Strike
+                        <ul style="list-style:none">
+                            <li class="fragment"><b>Spare:</b> In 2 Würfen abräumen</li>
+                            <li class="fragment"><b>Strike:</b> In 1 Wurf abräumen</li>
                         </ul>
-                        <aside class="notes">In die Runde Fragen ;)</aside>
-                    </section>
-
-					<section>
-						<h3>Warum <span style="text-decoration:underline">überhaupt</span> testen?</h3>
-						<p class="fragment">Und dann auch noch <strong>vor</strong> dem eigentlichen Code?</p>
-                        <p class="fragment">Wie viele Löcher dürfen es denn sein?</p>
-                        <div class="fragment">
-                            <iframe src="https://giphy.com/embed/81hgp3E9mwHn2" width="480" height="403" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-                            <p style="font-size:small"><a href="https://giphy.com/gifs/fail-airplane-army-81hgp3E9mwHn2">via GIPHY</a></p>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h5>!</h5>
-                        <ul>
-                            <li class="fragment">Kostenlose Dokumentation</li>
-                            <li class="fragment">"Wer hat schon Zeit für Tests wenn das Features doch schon fertig ist?"</li>
-                            <li class="fragment">Wir können uns "sicher" fühlen</li>
-                            <li class="fragment">Es ist nahezu unmöglich schwer wartbaren Code zu schreiben</li>
-                            <li class="fragment">Angewandte Psychologie: Die ständige Jagd nach grün!</li>
-                            <li class="fragment">Minimierte Debuggingzeit</li>
+                    </li>
+                    <li class="fragment">Framepunkte === umgeworfene Pins (+Bonus)</li>
+                    <li class="fragment">
+                        Bonuspunkte:
+                        <ul style="list-style:none">
+                            <li><b>Spare:</b> Im Frame die Punkte des nächsten Wurfs</li>
+                            <li><b>Strike:</b> Im Frame die Punkte der nächsten 2 Würfe</li>
                         </ul>
-						<aside class="notes">
-							<ul>
-								<li>Wie sicher fühlen wir uns, wenn:
-									<ul>
-										<li>wir jederzeit ein Savegame haben?</li>
-										<li>Wir zuversichtlich refactoren können</li>
-									</ul>
-								</li>
-                                <li>Wartbarer Code:
-                                    <br>TDD führt zu minimalem leicht testbaren Code
-                                    <br>leicht testbar === entkoppelt
-                                    <br>entkoppelt === leicht wartbar
-                                </li>
-								<li>Stichwort: Decoupling/Cyclomatic Complexity</li>
-							</ul>
-						</aside>
-					</section>
+                    </li>
+                </ul>
+            </section>
 
-                    <section>
-                        <h1>?</h1>
-                        <h3>Was ist denn die "richtige" Testabdeckung?</h3>
-                        <p> Also: Wie viel Prozent unseres Codes sollte durch Tests abgedeckt sein?</p>
-                    </section>
+            <!-- Zählsystembild -->
+            <section data-background-image="assets/zaehlsystem-1.png" data-background-size="100%"></section>
+            <section data-background-image="assets/zaehlsystem-2.png" data-background-size="100%"></section>
+            <section data-background-image="assets/zaehlsystem-3.png" data-background-size="100%"></section>
+            <section data-background-image="assets/zaehlsystem-4.png" data-background-size="100%"></section>
 
-					<section>
-						<h3>Aber was sagen <span style="color:#009ee3;background-color:#ffed00;border-bottom:12px solid #a5027d;padding-left:5px;padding-right:5px">Profis</span> zu TDD?</h3>
-                        <ul>
-                            <li class="fragment">Populäre Vertreter aus der Industrie: K. Beck, R.C. Martin (Clean *), etc.</li>
-                            <li class="fragment">TDD vs Test Last: <br>Qualität: 👍<br>Zeitaufwand: ⚖️ <a href="https://sewiki.iai.uni-bonn.de/_media/teaching/labs/xp/2012b/seminar/3-tdd.pdf">[1]</a></li>
-                            <li class="fragment">Gegenmeinungen: <a href="http://compilehorrors.com/test-driven-development-tdd-vs-test-last-development-tld-a-comparative-study/">compilehorrors.com</a></li>
-                            <li class="fragment">Außerdem: Fast alle Studien beziehen sich auf Java oder C-Dialekte.</li>
-                        </ul>
-					</section>
-				</section>
+            <section>
+                <h3>Anforderungen</h3>
+                <hr>
+                <p>Schreibe eine Klasse <b>Game</b> mit zwei Methoden:<br></p>
+                <pre><code data-trim data-noescape>
+                    # Spielerwurf eintragen
+                    public function roll(int $pins);
 
-				<!-- Theorie -->
-				<section>
-					<section>
-                        <h4>Die 3 Regeln des TDD¹</h4>
-						<ol>
-							<li><span class="fragment">Schreibe keinen Produktivcode, es sei denn er soll einen fehlgeschlagenen Test bestehen lassen.</span></li>
-							<li><span class="fragment">Schreibe nicht mehr von einem Unittest, als ausreicht um diesen scheitern zu lassen. Parsingfehler sind Fehler.</span></li>
-							<li><span class="fragment">Schreibe nicht mehr Produktionscode, als ausreichend ist, um den Test für eine nicht bestandene Einheit zu bestehen.</span></li>
-						</ol>
-                        <p style="font-size:16px">¹ Von Uncle Bob frei ins Deutsche und auf PHP angewandt.</p>
-					</section>
+                    # Punktestand berechnen & ausgeben
+                    public function score(): int;
+                </code></pre>
+            </section>
+        </section>
 
-					<section data-background-image="assets/red-green-refactor.png" data-background-color="#eee" data-background-size="80%"></section>
+        <section>
+            <h1>Lets go! :)</h1>
+        </section>
 
-					<section>
-						<h3>Echt jetzt? Ist das nicht ein <span style="text-decoration:underline">RIESEN</span> Overhead?</h3>
-					</section>
-                    <section>
-                        <h3>Schauen wir uns doch mal ein "recht" verbreitetes Vorgehen an</h3>
-                        <ul style="list-style: none">
-                            <li class="fragment"><span style="color:green">⏺</span> Dev implementiert features ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:green">⏺</span> Codereview ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:green">⏺</span> QA ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:red">⏺</span> User ➔ Findet Bug!</li>
-                            <li class="fragment"><span style="color:green">⏺</span> Dev fixt feature ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:green">⏺</span> Codereview ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:green">⏺</span> QA ➔ kein Bug</li>
-                            <li class="fragment"><span style="color:yellow">⏺</span> User ➔ Findet keinen Bug (vlt.?!)</li>
-                        </ul>
-                    </section>
-				</section>
+        <section>
+            <section>
+                <pre>test/GameTest.php</pre>
+                <pre><code data-trim data-noescape>
+                    class BowlingGameTest extends \PHPUnit\Framework\TestCase
+                    {
+                        public function testGameExists(): void
+                        {
+                        }
+                    }
+                </code></pre>
 
-				<!-- KATA -->
-				<section>
-					<section>
-						<h1>TDD Kata: Bowling Game</h1>
-					</section>
-					<section>
-						<h4>Regeln</h4>
-						<ul style="list-style:none">
-							<li>10 "Frames" mit 10 Pins</li>
-							<li class="fragment">
-                                2 Würfe pro Frame, aber 3 Würfe in Runde 10, wenn 1&2 Wurf Spare oder Strike
-                                <ul style="list-style:none">
-                                    <li class="fragment"><b>Spare:</b> In 2 Würfen abräumen</li>
-                                    <li class="fragment"><b>Strike:</b> In 1 Wurf abräumen</li>
-                                </ul>
-                            </li>
-                            <li class="fragment">Framepunkte === umgeworfene Pins (+Bonus)</li>
-							<li class="fragment">
-								Bonuspunkte:
-								<ul style="list-style:none">
-									<li><b>Spare:</b> Im Frame die Punkte des nächsten Wurfs</li>
-									<li><b>Strike:</b> Im Frame die Punkte der nächsten 2 Würfe</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
+                <div class="fragment">
+                    <pre>❯./vendor/bin/phpunit test/GameTest.php</pre>
+                    <pre>Result:</pre>
+                    <pre class="red">>> This test did not perform any assertions</pre>
+                </div>
+            </section>
 
-					<!-- Zählsystembild -->
-					<section data-background-image="assets/zaehlsystem-1.png" data-background-size="100%"></section>
-					<section data-background-image="assets/zaehlsystem-2.png" data-background-size="100%"></section>
-					<section data-background-image="assets/zaehlsystem-3.png" data-background-size="100%"></section>
-					<section data-background-image="assets/zaehlsystem-4.png" data-background-size="100%"></section>
+            <section>
+                <pre>test/GameTest.php</pre>
+                <pre><code data-trim data-noescape data-line-numbers="5">
+                    class BowlingGameTest extends \PHPUnit\Framework\TestCase
+                    {
+                        public function testGameExists(): void
+                        {
+                            $game = new \LokiDev\Bowling\Game();
+                        }
+                    }
+                </code></pre>
 
-					<section>
-						<h3>Anforderungen</h3>
-						<hr>
-						<p>Schreibe eine Klasse <b>Game</b> mit zwei Methoden:<br></p>
-						<pre><code data-trim data-noescape>
-							# Spielerwurf eintragen
-							public function roll(int $pins);
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="red">>> Error : Class 'LokiDev\Bowling\Game' not found</pre>
+                </div>
+            </section>
 
-							# Punktestand berechnen & ausgeben
-							public function score(): int;
-						</code></pre>
-					</section>
-				</section>
+            <section>
+                <pre>src/Game.php</pre>
+                <pre><code data-trim data-noescape>
+                    namespace LokiDev;
 
-				<section>
-					<h1>Lets go! :)</h1>
-				</section>
+                    class Game
+                    {
+                    }
+                </code></pre>
 
-				<section>
-					<section>
-						<pre>test/GameTest.php</pre>
-						<pre><code data-trim data-noescape>
-							class BowlingGameTest extends \PHPUnit\Framework\TestCase
-							{
-								public function testCanCreate(): void
-								{
-								}
-							}
-						</code></pre>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="red">>> This test did not perform any assertions</pre>
+                </div>
+            </section>
 
-						<div class="fragment">
-                            <pre>❯./vendor/bin/phpunit test/GameTest.php</pre>
-							<pre>Result:</pre>
-							<pre class="red">>> This test did not perform any assertions</pre>
-						</div>
-					</section>
+            <section>
+                <pre>test/GameTest.php</pre>
+                <pre><code data-trim data-noescape data-line-numbers="5-9">
+                    class BowlingGameTest extends \PHPUnit\Framework\TestCase
+                    {
+                        public function testGameExists(): void
+                        {
+                            $game = new \LokiDev\Game();
+                            self::assertNotEmpty($game);
+                            self::assertTrue(method_exists($game, 'score'));
+                            self::assertTrue(method_exists($game, 'roll'));
+                        }
+                    }
+                </code></pre>
 
-					<section>
-						<pre>test/GameTest.php</pre>
-						<pre><code data-trim data-noescape data-line-numbers="5">
-							class BowlingGameTest extends \PHPUnit\Framework\TestCase
-							{
-								public function testCanCreate(): void
-								{
-									$game = new \LokiDev\Game();
-								}
-							}
-						</code></pre>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="green">>> OK</pre>
+                </div>
 
-						<div class="fragment">
-							<pre>Result:</pre>
-							<pre class="red">>> Error : Class 'LokiDev\Game' not found</pre>
-						</div>
-					</section>
+                <h1 class="fragment green">!</h1>
+            </section>
 
-					<section>
-						<pre>src/Game.php</pre>
-						<pre><code data-trim data-noescape>
-							namespace LokiDev;
+            <section>
+                <h3>Refactor!</h3>
+                <pre>test/GameTest.php</pre>
+                <pre><code data-trim data-noescape data-line-numbers="3,4,6,10">
+                    namespace LokiDev\Bowling\Test;
 
-							class Game
-							{
-							}
-						</code></pre>
+                    use LokiDev\Bowling\Game;
+                    use PHPUnit\Framework\TestCase;
 
-						<div class="fragment">
-							<pre>Result:</pre>
-							<pre class="red">>> This test did not perform any assertions</pre>
-						</div>
-					</section>
+                    class GameTest extends TestCase
+                    {
+                        public function testCanCreate(): void
+                        {
+                            $game = new Game();
+                            self::assertNotEmpty($game);
+                            self::assertTrue(method_exists($game, 'score'));
+                            self::assertTrue(method_exists($game, 'roll'));
+                        }
+                    }
+                </code></pre>
 
-					<section>
-						<pre>test/GameTest.php</pre>
-						<pre><code data-trim data-noescape data-line-numbers="6">
-							class BowlingGameTest extends \PHPUnit\Framework\TestCase
-							{
-								public function testCanCreate(): void
-								{
-									$game = new \LokiDev\Game();
-									self::assertNotEmpty($game);
-								}
-							}
-						</code></pre>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="green">>> OK</pre>
+                </div>
+                <h1 class="fragment" style="color:purple">!</h1>
+            </section>
 
-						<div class="fragment">
-							<pre>Result:</pre> <pre class="green">>> OK</pre>
-						</div>
+            <!-- 02 -->
+            <section>
+                <h5>First "actual" test</h5>
+                <pre><code data-trim data-noescape data-line-numbers="4-7">
+                    public function testMinimalOutcome(): void
+                    {
+                        $game = new Game();
+                        for ($i = 0; $i < 20; $i++) {
+                            $game->roll(0);
+                        }
+                        self::assertSame(0, $game->score());
+                    }
+                </code></pre>
 
-						<h1 class="fragment green">!</h1>
-					</section>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="red">>> Error : Call to undefined method LokiDev\Game::roll()</pre>
+                </div>
+            </section>
 
-					<section>
-						<h3>[01] Refactor!</h3>
-						<pre>test/GameTest.php</pre>
-						<pre><code data-trim data-noescape data-line-numbers="3,4,6,10">
-							namespace LokiDev\Test;
+            <section>
+                <h5>First "actual" test</h5>
+                <pre><code data-trim data-noescape data-line-numbers="5-7,9-12">
+                    class Game implements BowlingInterface
+                    {
+                        public function roll(int $pins): void
+                        {
+                        }
 
-							use LokiDev\Game;
-							use PHPUnit\Framework\TestCase;
+                        public function score(): int
+                        {
+                            return 0;
+                        }
+                    }
+                </code></pre>
 
-							class GameTest extends TestCase
-							{
-								public function testCanCreate(): void
-								{
-									$game = new Game();
-									self::assertNotEmpty($game);
-								}
-							}
-						</code></pre>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="green">>> OK</pre>
+                </div>
+                <aside class="notes">03-green-rollnscore</aside>
+            </section>
 
-						<div class="fragment">
-							<pre>Result:</pre> <pre class="green">>> OK</pre>
-						</div>
-						<h1 style="color:purple">!</h1>
-                        <aside class="notes">
-                            01firsttest
-                        </aside>
-					</section>
+            <section>
+                <h5>Do not trick ourselves</h5>
+                <pre><code data-trim data-noescape>
+                    public function testAllOnes(): void
+                    {
+                        $game = new Game();
+                        for ($i = 0; $i < 20; $i++) {
+                            $game->roll(1);
+                        }
+                        self::assertSame(20, $game->score());
+                    }
+                </code></pre>
 
-                    <!-- 02 -->
-                    <section>
-                        <h5>[02] First "actual" test</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="4-7">
-                            public function testCanCreate(): void
-                            {
-                                $game = new Game();
-                                for ($i = 0; $i < 20; $i++) {
-                                    $game->roll(0);
-                                }
-                                self::assertSame(0, $game->score());
-                            }
-						</code></pre>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="red">>> Failed asserting that 0 is identical to 20.</pre>
+                </div>
+                <aside class="notes">04-red-roll-ones</aside>
+            </section>
 
-                        <div class="fragment"><pre>Result:</pre> <pre class="red">>> Error : Call to undefined method LokiDev\Game::roll()</pre></div>
-                        <aside class="notes">02-red-roll-20</aside>
-                    </section>
-
-                    <section>
-                        <h5>[03] First "actual" test</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="5-7,9-12">
-                            namespace LokiDev;
-
-                            class Game
-                            {
-                                public function roll(int $pins): void
-                                {
-                                }
-
-                                public function score(): int
-                                {
-                                    return 0;
-                                }
-                            }
-						</code></pre>
-
-                        <div class="fragment"><pre>Result:</pre> <pre class="green">>> OK</pre></div>
-                        <aside class="notes">03-green-rollnscore</aside>
-                    </section>
-
-                    <section>
-                        <h5>[04] Try to outplay us</h5>
-                        <pre><code data-trim data-noescape>
-                            public function testAllOnes(): void
-                            {
-                                $game = new Game();
-                                for ($i = 0; $i < 20; $i++) {
-                                    $game->roll(1);
-                                }
-                                self::assertSame(20, $game->score());
-                            }
-						</code></pre>
-
-                        <div class="fragment"><pre>Result:</pre> <pre class="red">>> Failed asserting that 0 is identical to 20.</pre></div>
-                        <aside class="notes">04-red-roll-ones</aside>
-                    </section>
-
-                    <section>
-                        <h5>[05] Fix: Lets remember pins</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="3,7,12">
+            <section>
+                <h5>Fix: Lets remember pins</h5>
+                <pre><code data-trim data-noescape data-line-numbers="3,7,12">
                             class Game
                             {
                                 private int $score = 0;
@@ -427,15 +454,18 @@
                                     return $this->score;
                                 }
                             }
-						</code></pre>
+                        </code></pre>
 
-                        <div class="fragment"><pre>Result:</pre> <pre class="green">>> OK</pre></div>
-                        <aside class="notes">03-green-rollnscore</aside>
-                    </section>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="green">>> OK</pre>
+                </div>
+                <aside class="notes">03-green-rollnscore</aside>
+            </section>
 
-                    <section>
-                        <h5>[06] Refactor tests</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="3,7-10">
+            <section>
+                <h5>Refactor tests</h5>
+                <pre><code data-trim data-noescape data-line-numbers="3,7-10">
                             class GameTest extends TestCase
                             {
                                 private Game $game;
@@ -447,16 +477,16 @@
                                     $this->game = new Game();
                                 }
                             }
-						</code></pre>
-                    </section>
+                        </code></pre>
+            </section>
 
-                    <section>
-                        <h5>[06] Refactor tests</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="4-9">
+            <section>
+                <h5>Refactor tests</h5>
+                <pre><code data-trim data-noescape data-line-numbers="4-9">
                             class GameTest extends TestCase
                             {
                                 // ...
-                                public function rollPinsNTimes(int $pins, int $times): void
+                                public function rollPinsMultipleTimes(int $pins, int $times): void
                                 {
                                     for ($i = 0; $i < $times; $i++) {
                                         $this->game->roll($pins);
@@ -464,134 +494,116 @@
                                 }
                                 // ...
                             }
-						</code></pre>
-                    </section>
+                        </code></pre>
+            </section>
 
-                    <section>
-                        <h5>[06] Refactor tests</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="4-8">
-                            class GameTest extends TestCase
-                            {
-                                // ...
-                                public function testCanCreate(): void
-                                {
-                                    $this->rollPinsNTimes(0, 20);
-                                    self::assertSame(0, $this->game->score());
-                                }
+            <section>
+                <h5>Refactor tests</h5>
+                <pre><code data-trim data-noescape data-line-numbers="4-8">
+                    class GameTest extends TestCase
+                    {
+                        // ...
+                        public function testCanCreate(): void
+                        {
+                            $this->rollPinsMultipleTimes(0, 20);
+                            self::assertSame(0, $this->game->score());
+                        }
 
-                                public function testAllOnes(): void
-                                {
-                                    $this->rollPinsNTimes(1, 20);
-                                    self::assertSame(20, $this->game->score());
-                                }
-                                // ...
-                            }
-						</code></pre>
-                    </section>
+                        public function testAllOnes(): void
+                        {
+                            $this->rollPinsMultipleTimes(1, 20);
+                            self::assertSame(20, $this->game->score());
+                        }
+                        // ...
+                    }
+                </code></pre>
+            </section>
 
-                    <section>
-                        <h5>[06] Refactor tests</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="10-14">
-                            class GameTest extends TestCase
-                            {
-                                // ...
-                                public function testCanCreate(): void
-                                {
-                                    $this->rollPinsNTimes(0, 20);
-                                    self::assertSame(0, $this->game->score());
-                                }
+            <section>
+                <h5>Refactor tests</h5>
+                <pre><code data-trim data-noescape data-line-numbers="10-14">
+                    class GameTest extends TestCase
+                    {
+                        // ...
+                        public function testCanCreate(): void
+                        {
+                            $this->rollPinsNTimes(0, 20);
+                            self::assertSame(0, $this->game->score());
+                        }
 
-                                public function testAllOnes(): void
-                                {
-                                    $this->rollPinsNTimes(1, 20);
-                                    self::assertSame(20, $this->game->score());
-                                }
-                                // ...
-                            }
-						</code></pre>
-                    </section>
+                        public function testAllOnes(): void
+                        {
+                            $this->rollPinsNTimes(1, 20);
+                            self::assertSame(20, $this->game->score());
+                        }
+                        // ...
+                    }
+                </code></pre>
+            </section>
 
-                    <section>
-                        <h5>Test:</h5>
-                        <div class="fragment"><pre>Result:</pre> <pre class="green">>> OK</pre></div>
-                        <aside class="notes">06-purple-refactor-tests</aside>
-                    </section>
+            <section>
+                <h5>Test</h5>
+                <div class="fragment">
+                    <pre>Result:</pre>
+                    <pre class="green">>> OK</pre>
+                </div>
+                <aside class="notes">06-purple-refactor-tests</aside>
+            </section>
 
-                    <section>
-                        <h5>[07] Test: Spare</h5>
-                        <pre><code data-trim data-noescape data-line-numbers="3-5,8">
-                            public function testOneSpare(): void
-                            {
-                                $this->game->roll(4);
-                                $this->game->roll(6);
-                                $this->game->roll(5);
-                                $this->rollPinsNTimes(17, 0);
+            <section>
+                <h1>--> Editor</h1>
+            </section>
 
-                                self::assertSame(20, $this->game->score());
-                            }
-						</code></pre>
+            <section>
+                <h1>Reicht das?</h1>
+                <p class="fragment">Natürlich nicht!</p>
+                <p class="fragment">Challenges ;)</p>
+            </section>
 
-                        <div class="fragment"><pre>Result:</pre> <pre class="red">>> Failed asserting that 15 is identical to 20.</pre></div>
-                        <aside class="notes">07-red-one-spare</aside>
-                    </section>
+            <section>
+                <h3>Challenges: Game Class</h3>
+                <ul>
+                    <li class="fragment">Ersetze die hässlichen Counter mit einer besseren Struktur (warum haben wir eigentlich 2 davon?)</li>
+                    <li class="fragment">Vereinfache isStrike - Warum direkt mehrere Aufrufe in jedem Schritt?</li>
+                    <li class="fragment">ifs & fors - Häufig ein Hinweis auf refactor Potential: Entferne beides durch foreach (z.B. durch einen FrameGenerator?)</li>
+                    <li class="fragment">Objekte. Weniger prozedural mehr echtes OOPS? Verkapselung usw?</li>
+                </ul>
+            </section>
 
-                    <section>
-                        <h5>Test: Spare - Code Analyse:</h5>
+            <section>
+                <h3>Challenges: Test Class</h3>
+                <ul>
+                    <li class="fragment">Prüfe, dass wir nicht zu häufig rollen! Schmeiße sonst eine Exception!</li>
+                    <li class="fragment">Prüfe, dass wir nur valide Pins rollen (1-10, aber auch 3+8 in einen Frame ausschließen!). Schmeiße sonst eine Exception</li>
+                    <li class="fragment">Meinungsfrage: Sollten wir beim Werfen (roll) oder beim Zählen (score) prüfen?</li>
+                </ul>
+            </section>
 
-                        <pre><code data-trim data-noescape>
-                            class Game
-                            {
-                                private int $score = 0;
+            <section>
+                <h1>Fragen?</h1>
+                <ul>
+                    <li class="fragment">Wie viel Coverage ist "richtig"?</li>
+                    <li class="fragment">
+                        Reichen 100%?
+                        <ul>
+                            <li class="fragment">pcov</li>
+                            <li class="fragment">Infections</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Pair programming?</li>
+                </ul>
+            </section>
 
-                                public function roll(int $pins): void
-                                {
-                                    $this->score += $pins;
-                                }
+        </section>
+    </div>
+</div>
 
-                                public function score(): int
-                                {
-                                    return $this->score;
-                                }
-                            }
-						</code></pre>
-
-                        <img class="fragment " src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/241/thinking-face_1f914.png" alt="">
-                        <aside class="notes">07-red-one-spare</aside>
-                    </section>
-
-                    <section>
-                        <h5>[08] Refactor: Würfe merken</h5>
-
-                        <p><i>Im Editor</i></p>
-
-                        <h5>Probleme:</h5>
-                        <div class="fragment">
-                            Versteckte Logik:
-                            <pre><code data-trim data-noescape>
-                                $tempscore = $this->rolls[$i] + $this->rolls[$i + 1];
-                                if ($tempscore === 10) {
-                                    $tempscore += $this->rolls[$i + 2];
-                                }
-                                $score += $tempscore;
-                            </code></pre>
-                        </div>
-                        <aside class="notes">Außerdem: Kein Fan von for ;).</aside>
-                    </section>
-
-                    <section>
-                        <h1>By the power of git + phpstorm!</h1>
-                    </section>
-
-				</section>
-			</div>
-		</div>
-
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-            Reveal.initialize({hash: true, plugins: [RevealMarkdown, RevealHighlight, RevealNotes]});
-		</script>
-	</body>
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({hash: true, plugins: [RevealMarkdown, RevealHighlight, RevealNotes]});
+</script>
+</body>
 </html>

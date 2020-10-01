@@ -18,8 +18,6 @@ final class GameTest extends TestCase
 {
     private Game $game;
 
-
-
     /** @dataProvider provideRolls */
     public function testRolls(array $rolls, int $expectedScore): void
     {
