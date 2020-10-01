@@ -27,6 +27,9 @@ final class GameTest extends TestCase
             '20 x 0' => [array_fill(0, 20, 0), 0],
             '20 x 1' => [array_fill(0, 20, 1), 20],
             'one spare' => [[5, 5, 5] + array_fill(0, 17, 0), 20],
+
+            // Exactly 19 rolls, as 10 will ignore the rest of the frame!
+            'one strike' => [[10, 2, 3] + array_fill(0, 16, 0), 20],
         ];
     }
 
