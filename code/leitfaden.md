@@ -15,7 +15,7 @@
 5. `(g)` __05-g-count-score__ ► count score
 6. `(p)` __06-p-refactor-test__ ► refactor tests
 7. `(r)` __07-r-test-1-spare__ ► test 1 spare
-8. `(p)` __08-p-uncomment-test__ ► won't work: (uncomment test)
+8. `(p)` __08-p-skip-new-test__ ► won't work: (skip new test)
 9. `(p)` __09-p-change-logic__ ► change logic - make other stuff green
 10. `(g)` __10-g-new-logic__ ► make new test green
 11. `(p)` __11-p-refactor__ ► Refactor test and game 

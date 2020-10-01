@@ -27,6 +27,8 @@ final class GameTest extends TestCase
 
     final public function testOneSpare(): void
     {
+        self::markTestSkipped('Redesign necessary!');
+
         $this->game->roll(5);
         $this->game->roll(5);
         $this->game->roll(5);
