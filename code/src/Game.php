@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Challenges
+ * - Replace those ugly counters with a better structure - why are there two anyway?
+ * - See if you can remove those multiple calls to `isStrike` -we already HAVE that information
+ * - See if you can remove this ugly for-loop and find a Generator or Objects based approach
+ * - Objects. While we're here - how about a introducing true OOP concepts?
+ */
+
 declare(strict_types=1);
 
 namespace LokiDev\Bowling;

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Test challenges:
+ *  - Test that we don't roll more than allowed!
+ *    (Keep in mind the difference in rolls, when rolling strikes!)
+ *  - Test that we only roll valid pins (1-10)
+ */
+
 declare(strict_types=1);
 
 namespace LokiDev\Bowling\Test;
@@ -10,6 +17,8 @@ use PHPUnit\Framework\TestCase;
 final class GameTest extends TestCase
 {
     private Game $game;
+
+
 
     /** @dataProvider provideRolls */
     public function testRolls(array $rolls, int $expectedScore): void
