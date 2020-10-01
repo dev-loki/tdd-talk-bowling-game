@@ -20,7 +20,8 @@ class GameTest extends TestCase
     final public function testMinimalOutcome(): void
     {
         $game = new Game();
-        for($i = 0; $i < 20; $i++) {
+
+        for ($i = 0; $i < 20; $i++) {
             $game->roll(0);
         }
 

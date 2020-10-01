@@ -12,5 +12,6 @@ class Game implements BowlingInterface
 
     public function score(): int
     {
+        return 0;
     }
 }

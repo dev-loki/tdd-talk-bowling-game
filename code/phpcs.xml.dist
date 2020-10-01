@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="Doc Snuggles coding standard">
+    <file>src</file>
+    <file>test</file>
+    <rule ref="PSR12"/>
+    <rule ref="Generic.PHP.RequireStrictTypes"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+       <properties>
+           <property name="ignoreBlankLines" value="false"/>
+       </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
+</ruleset>
